@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>이 여름, 나의 부캐는?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700;900&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#16232B;--bg:#FFF9EE;--coral:#FF6452;--coral-dark:#E44A38;--sun:#FFC847;--teal:#0B5F55;--teal-soft:#CDEDE6;--card:#FFFFFF;--line:#E8DECC;}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans KR',sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;justify-content:center;}
+.app{width:100%;max-width:480px;min-height:100vh;background:var(--bg);position:relative;overflow:hidden;}
+.screen{display:none;flex-direction:column;min-height:100vh;padding:28px 24px 40px;animation:fadeIn .45s ease;}
+.screen.active{display:flex;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+@media (prefers-reduced-motion:reduce){.screen{animation:none;}}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;color:var(--teal);font-weight:600;text-transform:uppercase;margin-bottom:6px;}
+h1,h2,h3{font-family:'Jua',sans-serif;font-weight:400;margin:0;}
+#screen-intro{justify-content:space-between;transform:translateZ(0);}
+.intro-top{margin-top:12px;text-align:center;}
+.intro-title{font-size:36px;line-height:1.25;color:var(--ink);margin-top:10px;}
+.intro-title em{font-style:normal;color:var(--coral);}
+.intro-sub{font-size:15px;color:#4B5B58;margin-top:12px;line-height:1.6;}
+.intro-meta { display: flex; gap: 10px; justify-content: center; margin-top: 16px; }
+.meta-chip{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13px;font-weight:500;color:var(--teal);}
+.intro-scene-wrap{flex:1;display:flex;align-items:center;justify-content:center;margin:14px 0;}
+.intro-scene{width:100%;height:260px;border-radius:24px;overflow:hidden;box-shadow:0 12px 28px -10px rgba(22,35,43,.25);position:relative;background:#FFF9EE;}
+.intro-scene img{width:100%;height:100%;display:block;object-fit:cover;}
+.btn-primary{width:100%;border:none;border-radius:16px;padding:18px 20px;background:var(--coral);color:#fff;font-size:17px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer;box-shadow:0 10px 24px -8px rgba(228,74,56,.55);transition:transform .15s ease;}
+.btn-primary:active{transform:scale(.97);}
+.intro-foot{text-align:center;font-size:12.5px;color:#7C8B87;margin-top:12px;}
+#screen-quiz{gap:0;justify-content:space-between;}
+.quiz-header{display:flex;flex-direction:column;}
+.progress-wrap{display:flex;gap:6px;margin-bottom:20px;}
+.dot{flex:1;height:5px;border-radius:999px;background:var(--line);overflow:hidden;}
+.dot i{display:block;height:100%;width:0%;background:var(--teal);transition:width .3s ease;}
+.quiz-image{width:100%;height:220px;border-radius:20px;overflow:hidden;margin:4px 0 20px;box-shadow:0 12px 26px -12px rgba(22,35,43,.3);background:#FFF9EE;}
+.quiz-image img{width:100%;height:100%;display:block;object-fit:cover;}
+.q-axis{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--coral);font-weight:600;margin-bottom:6px;}
+.q-text{font-size:20px;line-height:1.45;font-weight:700;margin-bottom:16px;min-height:58px;}
+.options{display:flex;flex-direction:column;gap:12px;margin-bottom:16px;}
+.option-btn{display:flex;align-items:center;justify-content:flex-start;text-align:left;border:2px solid var(--line);background:var(--card);border-radius:16px;padding:16px 20px;font-size:15px;font-weight:600;line-height:1.4;color:var(--ink);cursor:pointer;transition:.15s ease;font-family:'Noto Sans KR',sans-serif;width:100%;box-shadow:0 4px 10px rgba(0,0,0,0.02);}
+.option-btn .opt-emoji{font-size:20px;margin-right:12px;flex-shrink:0;}
+.option-btn:active{transform:scale(.98);background:var(--teal-soft);border-color:var(--teal);}
+.quiz-foot{text-align:center;font-size:12.5px;color:#7C8B87;margin-top:auto;}
+#screen-loading{align-items:center;justify-content:center;text-align:center;gap:18px;}
+.load-ring{width:88px;height:88px;border-radius:50%;border:6px solid var(--teal-soft);border-top-color:var(--coral);animation:spin 0.9s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.load-text{font-size:16px;font-weight:700;color:var(--teal);}
+.load-sub{font-size:13px;color:#7C8B87;}
+#screen-result{padding-top:20px;gap:26px;}
+.result-card{border-radius:24px;padding:0 0 26px;text-align:center;position:relative;overflow:hidden;background:var(--card);box-shadow:0 18px 40px -16px rgba(22,35,43,.35);}
+.result-visual{position:relative;height:280px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#F7F9F8;}
+.result-visual img{width:100%;height:100%;object-fit:cover;display:block;}
+.tape{position:absolute;top:14px;left:50%;transform:translateX(-50%) rotate(-3deg);width:84px;height:24px;background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.7);border-radius:3px;z-index:3;backdrop-filter:blur(1px);}
+.result-info{padding:22px 24px 0;}
+.result-eyebrow{font-size:15px;font-weight:700;color:var(--teal);margin-top:0;}
+.result-title{font-size:30px;color:var(--ink);margin:6px 0 6px;line-height:1.25;}
+.result-code{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.15em;color:var(--teal);font-weight:600;}
+.result-desc{font-size:14.5px;line-height:1.7;color:#37453F;margin-top:14px;padding:0 2px;}
+.section-title{font-size:19px;margin-bottom:4px;}
+.section-title span { color: var(--coral); }
+.tips-intro{font-size:13.5px;color:#5C6B67;margin-bottom:16px;}
+.tip-item{background:var(--card);border-radius:14px;margin-bottom:10px;overflow:hidden;border:1px solid var(--line);}
+.tip-item.hi{border-color:var(--coral);box-shadow:0 4px 14px -6px rgba(228,74,56,.3);}
+.tip-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;cursor:pointer;user-select:none;}
+.tip-head-left{display:flex;align-items:center;gap:8px;}
+.tip-badge{background:var(--coral);color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;letter-spacing:.02em;}
+.tip-title{font-size:14.5px;font-weight:700;color:var(--ink);}
+.tip-arrow{font-size:14px;color:#7C8B87;transition:transform .25s ease;}
+.tip-item.open .tip-arrow{transform:rotate(180deg);}
+.tip-body{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .25s ease;padding:0 16px;}
+.tip-item.open .tip-body{max-height:400px;padding:0 16px 14px;}
+.tip-body ul{margin:0;padding-left:18px;}
+.tip-body li{font-size:13px;line-height:1.7;color:#37453F;margin-bottom:4px;}
+.solution-block{background:linear-gradient(135deg,#0B5F55 0%,#17A398 100%);color:#fff;border-radius:20px;padding:22px 22px;position:relative;box-shadow:0 14px 30px -14px rgba(11,95,85,.5);}
+.solution-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;color:var(--sun);font-weight:600;margin-bottom:10px;}
+.solution-text{font-size:14.5px;line-height:1.7;margin:0;font-weight:500;}
+
+/* CSS 기프티콘 배너 적용 */
+.reward-banner{background:#FFF6E5;border:2px dashed #FFC847;border-radius:24px;padding:24px 22px;position:relative;text-align:center;box-shadow:0 8px 20px rgba(255,200,71,0.15);overflow:hidden;}
+.reward-banner-badge{position:absolute;top:10px;left:20px;background:var(--coral);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.15em;padding:5px 12px;border-radius:6px;box-shadow:0 4px 10px rgba(228,74,56,0.3);}
+.css-real-gift-card { width: 190px; height: 118px; margin: 16px auto 20px; border-radius: 12px; background: linear-gradient(135deg, #03C75A 0%, #029443 100%); position: relative; overflow: hidden; padding: 14px 16px; text-align: left; box-shadow: 0 12px 24px rgba(3, 199, 90, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.4); transition: transform 0.3s ease; cursor: pointer; }
+.css-real-gift-card:hover { transform: translateY(-4px) rotate(2deg); }
+.card-brand-logo { font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 700; color: #ffffff; }
+.card-chip { width: 24px; height: 18px; background: linear-gradient(135deg, #FFD700 0%, #B8860B 100%); border-radius: 4px; margin-top: 8px; }
+.card-amount { font-family: 'Jua', sans-serif; font-size: 26px; color: #ffffff; margin-top: 10px; line-height: 1; }
+.card-product-name { font-size: 11px; color: rgba(255, 255, 255, 0.8); margin-top: 4px; }
+.card-shine-line { position: absolute; top: 0; left: -50%; width: 40%; height: 100%; background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0) 100%); transform: skewX(-25deg); animation: shine 3.5s infinite ease-in-out; }
+@keyframes shine { 0% { left: -50%; } 20% { left: 150%; } 100% { left: 150%; } }
+.reward-banner-title{font-size:15px;font-weight:700;color:var(--ink);margin:6px 0 4px;line-height:1.5;}
+.reward-banner-title span{color:#03C75A;}
+.reward-banner-sub{font-size:12.5px;color:#7C8B87;margin:0;}
+
+.cta-block{display:flex;flex-direction:column;gap:10px;}
+.cta-sub{font-size:13px;color:#5C6B67;text-align:center;margin:0;line-height:1.55;}
+.notice-text{padding:4px 4px 0;}
+.notice-title{font-size:14px;font-weight:700;color:#16232B;margin:0 0 8px;}
+.notice-text p:not(.notice-title){margin:0 0 7px;font-size:13px;line-height:1.7;color:#16232B;}
+#screen-form{gap:20px;}
+.form-title{font-size:22px;line-height:1.4;}
+.form-sub{font-size:13.5px;color:#5C6B67;margin-top:6px;}
+.field{display:flex;flex-direction:column;gap:6px;margin-top:6px;}
+.field label{font-size:13px;font-weight:700;color:var(--teal);}
+.field input{border:2px solid var(--line);border-radius:12px;padding:14px 14px;font-size:15px;font-family:'Noto Sans KR',sans-serif;background:#fff;}
+.field input:focus{outline:2px solid var(--coral);border-color:var(--coral);}
+.consent{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:#5C6B67;margin-top:4px;}
+.consent input{margin-top:3px;}
+#screen-done{align-items:center;justify-content:center;text-align:center;gap:14px;}
+.done-emoji{font-size:54px;}
+.done-title{font-size:22px;}
+.done-sub{font-size:14px;color:#5C6B67;line-height:1.6;}
+.back-link{font-size:13px;color:#7C8B87;text-decoration:underline;background:none;border:none;cursor:pointer;margin-top:6px;font-family:'Noto Sans KR',sans-serif;align-self:flex-start;}
+</style>
+</head>
+<body>
+<div class="app">
+  <section id="screen-intro" class="screen active">
+    <div class="intro-top">
+      <div class="eyebrow">SUMMER TYPE TEST</div>
+      <h1 class="intro-title">이 여름,<br>나의 <em>부캐</em>는?</h1>
+      <p class="intro-sub">6가지 질문으로 알아보는 여름 성향 테스트.<br>6명의 부캐 중 나의 진짜 여름 스타일을 찾아보세요.</p>
+      <div class="intro-meta">
+        <span class="meta-chip">⏱ 3분 완성</span>
+        <span class="meta-chip">🎁 참여 리워드</span>
+      </div>
+    </div>
+    <div class="intro-scene-wrap">
+      <div class="intro-scene">
+        <!-- 1. 메인 배너 이미지 경로 변경 완료 -->
+        <img src="images/main-banner.png" alt="6가지 여름 부캐">
+      </div>
+    </div>
+    <div>
+      <button class="btn-primary" onclick="goTo('quiz')">테스트 시작하기</button>
+      <p class="intro-foot">이 중 나의 부캐는 어떤 유형일까?</p>
+    </div>
+  </section>
+  <section id="screen-quiz" class="screen">
+    <div class="quiz-header">
+      <div class="progress-wrap" id="progressWrap"></div>
+      <div class="q-axis" id="qAxis"></div>
+      <div class="q-text" id="qText"></div>
+    </div>
+    <div class="quiz-image" id="qImage"></div>
+    <div class="options" id="qOptions"></div>
+    <div class="quiz-foot">선택하면 바로 다음 질문으로 넘어가요</div>
+  </section>
+  <section id="screen-loading" class="screen">
+    <div class="load-ring"></div>
+    <div class="load-text">당신의 여름 부캐 분석 중<span id="loadingDots">...</span></div>
+    <div class="load-sub">6가지 답변을 조합하고 있어요</div>
+  </section>
+  <section id="screen-result" class="screen">
+    <div class="result-card" id="resultCard">
+      <div class="result-visual" id="rVisual">
+        <div class="tape"></div>
+      </div>
+      <div class="result-info">
+        <div class="result-eyebrow">당신의 여름 부캐는</div>
+        <h2 class="result-title" id="rTitle"></h2>
+        <div class="result-code" id="rCode"></div>        
+        <p class="result-desc" id="rDesc"></p>
+      </div>
+    </div>
+    <div>
+      <h3 class="section-title"><span id="rTipIntroName"></span>을 위한 여름나기 꿀팁</h3>
+      <p class="tips-intro" id="rTipIntro"></p>
+      <div id="tipsList"></div>
+    </div>
+    <div class="solution-block">
+      <div class="solution-label">MY SOLUTION</div>
+      <p class="solution-text" id="rSolution"></p>
+    </div>
+    
+    <!-- CSS 전용 기프티콘 배너 (이미지 파일 준비 필요 없음) -->
+    <div class="reward-banner">
+      <div class="reward-banner-badge">EVENT</div>
+      <div class="css-real-gift-card">
+        <div class="card-brand-logo">Naver Pay</div>
+
+        <div class="card-amount">₩10,000</div>
+        <div class="card-product-name">포인트 쿠폰</div>
+        <div class="card-shine-line"></div>
+      </div>
+      <p class="reward-banner-title">지금 신청하면 <span>네이버페이 1만원권</span> 드려요</p>
+      <p class="reward-banner-sub">1분 인증콜만 완료하면 바로 지급돼요</p>
+    </div>
+    
+    <div class="cta-block">
+      <p class="cta-sub">강요 없어요. 지금 내 보장 상태만 가볍게 확인하는 거예요.</p>
+      <button class="btn-primary" onclick="goTo('form')">무료 보장공백 점검 신청하기</button>
+    </div>
+    <div class="notice-text">
+      <p class="notice-title">&lt;유의사항&gt;</p>
+      <p>· 본 이벤트는 사전 안내 없이 조기 종료되거나 변경될 수 있습니다.</p>
+      <p>· 리워드는 상담 인증콜 완료 후 영업일 기준 5일 이내 지급됩니다.</p>
+      <p>· 1인 1회에 한해 참여 및 리워드 지급이 가능합니다.</p>
+      <p>· 허위 정보 기재 시 리워드 지급이 제한될 수 있습니다.</p>
+      <p>· 보장 내용 및 가입 여부는 상담을 통해 개별 안내드립니다.</p>
+    </div>
+  </section>
+  <section id="screen-form" class="screen">
+    <button class="back-link" onclick="goTo('result')">← 결과로 돌아가기</button>
+    <h2 class="form-title">보장공백 점검, 1분이면 충분해요</h2>
+    <p class="form-sub">인증콜 완료 시 네이버페이 1만원권을 드려요.</p>
+    <div class="field"><label for="fName">이름</label><input id="fName" type="text" placeholder="홍길동"></div>
+    <div class="field"><label for="fPhone">연락처</label><input id="fPhone" type="tel" placeholder="010-0000-0000"></div>
+    <label class="consent"><input type="checkbox" id="fConsent"> 개인정보 수집·이용에 동의합니다. (점검 및 리워드 지급 목적)</label>
+    <button class="btn-primary" id="submitBtn" onclick="submitForm()">신청 완료하기</button>
+  </section>
+  <section id="screen-done" class="screen">
+    <div class="done-emoji">🎉</div>
+    <h2 class="done-title">신청 완료!</h2>
+    <p class="done-sub">담당자가 1분 인증콜로 연락드릴게요.<br>완료 후 네이버페이 1만원권이 지급돼요.</p>
+  </section>
+</div>
+<script>
+const questions = [
+  {axis:'E/I', img:'wave',     text:'드디어 여름휴가. 눈 감으면 가장 먼저 떠오르는 장면은?', a:{emoji:'🏖️', label:'발끝에 닿는 파도, 흔들리는 파라솔 — 무조건 야외', v:'E'}, b:{emoji:'🎬', label:'커튼 치고 에어컨 빵빵, 넷플릭스 몰아보기가 진짜 휴가', v:'I'}},
+  {axis:'E/I', img:'weekend',  text:'금요일 밤 8시, 알람도 없는 주말이 시작됐다. 나는?', a:{emoji:'✨', label:'일단 약속부터 잡고 어디든 밖으로 튄다', v:'E'}, b:{emoji:'🛋️', label:'침대와 한 몸이 되어 진짜 아무것도 안 한다', v:'I'}},
+  {axis:'P/U', img:'suitcase', text:'여행 D-7. 스마트폰을 열면 나는?', a:{emoji:'📝', label:'시간표에 맛집·동선까지 색깔별로 정리 끝', v:'P'}, b:{emoji:'✈️', label:'비행기표만 있으면 됐지, 나머진 그때 가서', v:'U'}},
+  {axis:'P/U', img:'packing',  text:'출발 전날 밤, 내 캐리어 상태는?', a:{emoji:'📅', label:'며칠 전부터 리스트 체크하며 완벽하게 정리 완료', v:'P'}, b:{emoji:'🎒', label:'새벽에 눈뜨자마자 되는 대로 쑤셔 넣는다', v:'U'}},
+  {axis:'F/C', img:'surf',     text:'친구가 "패러글라이딩 같이 갈래?" 물어보면 나는?', a:{emoji:'🏄', label:'"콜!" 이미 예약창 켜는 중, 고민은 사치', v:'F'}, b:{emoji:'🔍', label:'"잠깐만" 사고율·후기부터 정독하는 중', v:'C'}},
+  {axis:'F/C', img:'compass',  text:'낯선 도시, 지도에 없는 골목을 마주쳤을 때 나는?', a:{emoji:'🗺️', label:'지도 접고 발길 닿는 대로 걷는 게 여행이지', v:'F'}, b:{emoji:'📍', label:'별점 4.5 이상만, 검증된 루트로만 움직인다', v:'C'}},
+];
+
+// 2. 퀴즈 중간 이미지 경로 변경 완료 (로컬 images 폴더 기준)
+const quizImages = {
+  wave:     'images/wave.png',
+  weekend:  'images/weekend.png',
+  suitcase: 'images/suitcase.png',
+  packing:  'images/packing.png',
+  surf:     'images/surf.png',
+  compass:  'images/compass.png',
+};
+
+// 3. 결과 캐릭터 이미지 경로 변경 완료 (로컬 images 폴더 기준)
+const resultImages = {
+  EPF: 'images/epf.png',
+  EPC: 'images/epc.png',
+  EUF: 'images/euf.png',
+  IPF: 'images/ipf.png',
+  IPC: 'images/ipc.png',
+  IUC: 'images/iuc.png',
+};
+
+const tips = [
+  {id:1, title:'물, 얼마나 마셔야 할까?', items:['평소보다 하루 500ml~1L 정도 더 마시기','한 번에 많이보다 시간당 200ml씩 나눠 마시기','땀 많이 흘리는 날엔 이온음료로 전해질도 함께 보충','카페인·알코올은 탈수를 부추기니 더운 날엔 주의']},
+  {id:2, title:'자외선 차단, 이렇게 하면 확실', items:['SPF 50+ / PA++++ 제품 권장','외출 30분 전 도포, 2~3시간마다 덧바르기','물놀이·땀 많은 날엔 워터프루프 제품 선택','목뒤, 귀, 손등도 놓치기 쉬운 부위']},
+  {id:3, title:'액티비티 전후 체크리스트', items:['공복 상태 운동·물놀이는 어지럼증 위험 ↑','한낮(11시~15시) 야외활동은 되도록 피하기','어지러움·메스꺼움 있으면 즉시 그늘로 이동','전날 술 마셨다면 무리한 활동은 피하기']},
+  {id:4, title:'냉방병, 실내파도 방심 금물', items:['실내외 온도차 5도 이내로 유지','장시간 냉방 시 1시간에 한 번 환기','얇은 겉옷 챙겨서 체온 급변 방지','으슬으슬하면 미지근한 물로 체온 조절']},
+];
+
+const types = {
+  EPF:{name:'갓생 폭주 마스터', emoji:'🔥', code:'EPF', hi:[1,3], tipIntro:'일정 빡빡한 당신, 이 2개는 꼭 챙기세요',
+    desc:'여름 스케줄표만 봐도 남들은 숨이 찬다. 근데 나는 "이거밖에 없어?" 소리 나오는 사람. 계획도 완벽, 실행은 광속, 텐션은 무한. 여름을 4번 사는 유형이에요.',
+    solution:'다 챙기는 갓생러도 \'보장 스케줄\'은 놓친 적 있죠. 활동량이 많을수록 상해·응급 보장이 비어있으면 훅 갑니다. 이건 미리 캘린더에 넣어두세요.'},
+  EPC:{name:'계획적 안전주의자', emoji:'🛡️', code:'EPC', hi:[1,2], tipIntro:'이미 조심스러운 편이지만, 이건 놓치기 쉬워요',
+    desc:'"재밌게, 근데 안전하게." 후기 3페이지는 기본, 사고율 통계까지 스크린샷 저장. 즉흥적으로 나가도 리스크는 절대 안 안고 가는 진짜 어른 부캐예요.',
+    solution:'안전에 진심이라면 보장도 진심이어야죠. 가입한 지 오래됐다면 지금 조건과 다를 수 있어요. 5년 넘었다면 무조건 점검이에요.'},
+  EUF:{name:'즉흥 도파민 폭주족', emoji:'⚡', code:'EUF', hi:[2,3], tipIntro:'즉흥적으로 움직이는 당신, 이것만은 미리 챙기세요',
+    desc:'"가자!" 한 마디로 인생이 굴러가는 사람. 계획? 그건 재미없는 사람들 얘기. 여행지에서 새벽 3시에 낯선 클럽 발견 → 그냥 들어감. 그게 나예요.',
+    solution:'저지르는 만큼 예상 밖 상황도 많아지죠. 응급실 갈 일 생겼을 때 "아 그때 보장 확인할걸..." 안 하려면, 지금이에요.'},
+  IPF:{name:'홈 챌린저', emoji:'🎮', code:'IPF', hi:[4,1], tipIntro:'집에서도 텐션 유지하려면 이거 체크',
+    desc:'집 = 놀이터. 홈파티·홈트·홈베이킹부터 갑자기 시작한 새벽 챌린지까지 다 시도하는 실내파 만렙. 밖에 안 나가도 하루가 짧은 사람이에요.',
+    solution:'집에서도 사고는 나요. 실내 화상, 미끄러짐, 냉방병… 의외로 보장 안 되는 케이스 많아요. 집순이라도 이건 챙기세요.'},
+  IPC:{name:'방콕 마스터 클래스', emoji:'🧊', code:'IPC', hi:[4], tipIntro:'방콕러도 이건 은근 잘 놓쳐요',
+    desc:'에어컨 26도, 커튼 반쯤, 얼음물 옆에. 완벽한 환경 세팅에 진심인 진정한 여름 고수. 밖은 지옥, 안은 천국이라는 걸 몸으로 아는 사람이에요.',
+    solution:'방콕도 계획적으로 하는 당신, 보장 계획도 세워두면 완벽하죠. 혹시 모를 상황을 위한 최소한의 안전망, 5분이면 점검 끝나요.'},
+  IUC:{name:'궁극의 이불 요새', emoji:'🛌', code:'IUC', hi:[4], tipIntro:'이불 밖은 위험해도, 이건 알아두세요',
+    desc:'"이불 밖은 위험해"라는 명언을 몸소 증명하는 유형. 배달앱과 OTT로 완성되는 나의 여름. 아무것도 안 하는데 뭔가 행복한 궁극의 물멍형이에요.',
+    solution:'이불 밖이 위험한 만큼, 이불 안에도 대비는 필요해요. 예상 밖의 순간은 실내에서도 옵니다. 조용히, 미리, 확인만 하면 돼요.'},
+};
+
+let current = 0;
+let answers = [];
+let finalUserType = "";
+
+function goTo(name){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('screen-'+name).classList.add('active');
+  window.scrollTo(0,0);
+  if(name==='quiz'){current=0;answers=[];renderQuestion();}
+}
+function renderProgress(){
+  const wrap = document.getElementById('progressWrap');
+  wrap.innerHTML='';
+  questions.forEach((_,i)=>{
+    const d=document.createElement('div');
+    d.className='dot';
+    const fill=document.createElement('i');
+    fill.style.width = i < current ? '100%' : (i===current ? '100%':'0%');
+    d.appendChild(fill);
+    wrap.appendChild(d);
+  });
+}
+function renderQuestion(){
+  renderProgress();
+  const q = questions[current];
+  document.getElementById('qImage').innerHTML = `<img src="${quizImages[q.img]}" alt="Q${current+1}">`;
+  document.getElementById('qAxis').textContent = `Q${current+1} / ${questions.length}`;
+  document.getElementById('qText').textContent = q.text;
+  const opts = document.getElementById('qOptions');
+  opts.innerHTML='';
+  [q.a,q.b].forEach(opt=>{
+    const btn=document.createElement('button');
+    btn.className='option-btn';
+    btn.innerHTML = `<span class="opt-emoji">${opt.emoji}</span><span class="opt-label">${opt.label}</span>`;
+    btn.onclick=()=>selectAnswer(opt.v);
+    opts.appendChild(btn);
+  });
+}
+function selectAnswer(v){
+  answers.push(v);
+  current++;
+  if(current < questions.length){renderQuestion();}
+  else {
+    goTo('loading');
+    let dots=0;
+    const dotEl=document.getElementById('loadingDots');
+    const dotTimer=setInterval(()=>{dots=(dots+1)%4;dotEl.textContent='.'.repeat(dots);},350);
+    setTimeout(()=>{clearInterval(dotTimer);showResult();},1800);
+  }
+}
+function computeAxis(vals, a, b){
+  const countA = vals.filter(v=>v===a).length;
+  return countA >= vals.length/2 ? a : b;
+}
+
+function mapToSixTypes(ei, pu, fc){
+  const code = ei+pu+fc;
+  const merge = { 'EUC': 'EPC', 'IUF': 'IPF' };
+  return merge[code] || code;
+}
+
+function showResult(){
+  const ei = computeAxis([answers[0],answers[1]], 'E','I');
+  const pu = computeAxis([answers[2],answers[3]], 'P','U');
+  const fc = computeAxis([answers[4],answers[5]], 'F','C');
+  const code = mapToSixTypes(ei, pu, fc);
+  const t = types[code];
+  
+  finalUserType = t.name;
+  
+  const visual = document.getElementById('rVisual');
+  visual.innerHTML = `<img src="${resultImages[t.code]}" alt="${t.name}"><div class="tape"></div>`;
+  document.getElementById('rTitle').textContent = `${t.emoji} ${t.name}`;
+  document.getElementById('rDesc').textContent = t.desc;
+  document.getElementById('rTipIntroName').textContent = t.name;
+  document.getElementById('rTipIntro').textContent = t.tipIntro;
+  document.getElementById('rSolution').textContent = t.solution;
+  const list = document.getElementById('tipsList');
+  list.innerHTML='';
+  tips.forEach(tip=>{
+    const isHi = t.hi.includes(tip.id);
+    const item=document.createElement('div');
+    item.className='tip-item'+(isHi?' hi':'');
+    item.innerHTML = `<div class="tip-head" onclick="this.parentElement.classList.toggle('open')"><div class="tip-head-left">${isHi?'<span class="tip-badge">추천</span>':''}<span class="tip-title">${tip.title}</span></div><span class="tip-arrow">▾</span></div><div class="tip-body"><ul>${tip.items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`;
+    if(isHi) item.classList.add('open');
+    list.appendChild(item);
+  });
+  goTo('result');
+}
+
+function submitForm(){
+  const name = document.getElementById('fName').value.trim();
+  const phone = document.getElementById('fPhone').value.trim();
+  const consent = document.getElementById('fConsent').checked;
+  const btn = document.getElementById('submitBtn');
+
+  if(!name || !phone){alert('이름과 연락처를 입력해주세요.');return;}
+  if(!consent){alert('개인정보 수집·이용에 동의해주세요.');return;}
+  
+  btn.disabled = true;
+  btn.textContent = "신청 처리 중...";
+
+  const formData = {
+    "이름": name,
+    "연락처": phone,
+    "부캐결과": finalUserType,
+    "신청일시": new Date().toLocaleString('ko-KR')
+  };
+
+  // 💡 SheetDB 주소를 만들어서 발급받은 실제 API 키값으로 교체하는 구역
+  fetch('https://sheetdb.io/api/v1/내_SheetDB_API_주소', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ data: [formData] })
+  })
+  .then((response) => response.json())
+  .then((data) => {
+    console.log('DB 저장 완료:', data);
+    goTo('done');
+  })
+  .catch((error) => {
+    console.error('에러 발생:', error);
+    // API 연결 전 테스트용 마케팅 퍼널 예외 처리
+    goTo('done');
+  });
+}
+</script>
+</body>
+</html>
