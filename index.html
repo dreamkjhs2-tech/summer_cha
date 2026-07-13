@@ -75,24 +75,24 @@ h1,h2,h3{font-family:'Jua',sans-serif;font-weight:400;margin:0;}
 .tip-item.open .tip-body{max-height:400px;padding:0 16px 14px;}
 .tip-body ul{margin:0;padding-left:18px;}
 .tip-body li{font-size:13px;line-height:1.7;color:#37453F;margin-bottom:4px;}
-.solution-block{background:linear-gradient(135deg,#0B5F55 0%,#17A398 100%);color:#fff;border-radius:20px;padding:22px 22px;position:relative;box-shadow:0 14px 30px -14px rgba(11,95,85,.5);}
-.solution-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;color:var(--sun);font-weight:600;margin-bottom:10px;}
-.solution-text{font-size:14.5px;line-height:1.7;margin:0;font-weight:500;}
-
-/* CSS 기프티콘 배너 적용 */
-.reward-banner{background:#FFF6E5;border:2px dashed #FFC847;border-radius:24px;padding:24px 22px;position:relative;text-align:center;box-shadow:0 8px 20px rgba(255,200,71,0.15);overflow:hidden;}
-.reward-banner-badge{position:absolute;top:10px;left:20px;background:var(--coral);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.15em;padding:5px 12px;border-radius:6px;box-shadow:0 4px 10px rgba(228,74,56,0.3);}
-.css-real-gift-card { width: 190px; height: 118px; margin: 16px auto 20px; border-radius: 12px; background: linear-gradient(135deg, #03C75A 0%, #029443 100%); position: relative; overflow: hidden; padding: 14px 16px; text-align: left; box-shadow: 0 12px 24px rgba(3, 199, 90, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.4); transition: transform 0.3s ease; cursor: pointer; }
-.css-real-gift-card:hover { transform: translateY(-4px) rotate(2deg); }
-.card-brand-logo { font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 700; color: #ffffff; }
-.card-chip { width: 24px; height: 18px; background: linear-gradient(135deg, #FFD700 0%, #B8860B 100%); border-radius: 4px; margin-top: 8px; }
-.card-amount { font-family: 'Jua', sans-serif; font-size: 26px; color: #ffffff; margin-top: 10px; line-height: 1; }
-.card-product-name { font-size: 11px; color: rgba(255, 255, 255, 0.8); margin-top: 4px; }
-.card-shine-line { position: absolute; top: 0; left: -50%; width: 40%; height: 100%; background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0) 100%); transform: skewX(-25deg); animation: shine 3.5s infinite ease-in-out; }
-@keyframes shine { 0% { left: -50%; } 20% { left: 150%; } 100% { left: 150%; } }
-.reward-banner-title{font-size:15px;font-weight:700;color:var(--ink);margin:6px 0 4px;line-height:1.5;}
-.reward-banner-title span{color:#03C75A;}
-.reward-banner-sub{font-size:12.5px;color:#7C8B87;margin:0;}
+.convert-card{background:var(--card);border-radius:20px;padding:26px 20px 22px;position:relative;border:1px solid var(--line);box-shadow:0 10px 26px -14px rgba(22,35,43,.2);overflow:hidden;}
+.convert-card::before{content:"";position:absolute;top:0;left:0;width:6px;height:100%;background:var(--coral);}
+.convert-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--coral);font-weight:700;margin:0 0 10px;padding-left:8px;}
+.convert-hook{font-family:'Jua',sans-serif;font-size:23px;line-height:1.35;color:var(--ink);margin:0 0 14px;padding-left:8px;}
+.convert-hook strong{color:var(--coral-dark);}
+.convert-icons{display:flex;gap:8px;margin-bottom:16px;padding-left:8px;}
+.c-icon{flex:1;background:#FFF1EE;border-radius:12px;padding:10px 6px;text-align:center;}
+.c-icon .c-emoji{font-size:19px;display:block;margin-bottom:4px;}
+.c-icon .c-label{font-size:11px;font-weight:700;color:var(--coral-dark);}
+.convert-body{font-size:13.5px;line-height:1.75;color:#37453F;margin:0 0 18px;padding-left:8px;}
+.convert-body strong{color:var(--coral-dark);font-weight:800;}
+.convert-divider{height:1px;background:var(--line);margin:0 8px 16px;}
+.convert-event{display:flex;align-items:center;gap:10px;background:#F0FAF4;border-radius:14px;padding:12px 14px;margin:0 8px 18px;}
+.event-tag{background:#03C75A;color:#fff;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.06em;padding:4px 8px;border-radius:6px;flex-shrink:0;}
+.event-text{font-size:12.5px;font-weight:600;color:#16232B;margin:0;line-height:1.5;}
+.event-text strong{color:#029443;}
+.convert-card .btn-primary{margin:0 8px;width:calc(100% - 16px);}
+.convert-cta-sub{font-size:12px;color:#7C8B87;text-align:center;margin:10px 8px 0;line-height:1.5;}
 
 .cta-block{display:flex;flex-direction:column;gap:10px;}
 .cta-sub{font-size:13px;color:#5C6B67;text-align:center;margin:0;line-height:1.55;}
@@ -170,28 +170,22 @@ h1,h2,h3{font-family:'Jua',sans-serif;font-weight:400;margin:0;}
       <p class="tips-intro" id="rTipIntro"></p>
       <div id="tipsList"></div>
     </div>
-    <div class="solution-block">
-      <div class="solution-label">MY SOLUTION</div>
-      <p class="solution-text" id="rSolution"></p>
-    </div>
-    
-    <!-- CSS 전용 기프티콘 배너 (이미지 파일 준비 필요 없음) -->
-    <div class="reward-banner">
-      <div class="reward-banner-badge">EVENT</div>
-      <div class="css-real-gift-card">
-        <div class="card-brand-logo">Naver Pay</div>
-
-        <div class="card-amount">₩10,000</div>
-        <div class="card-product-name">포인트 쿠폰</div>
-        <div class="card-shine-line"></div>
+    <div class="convert-card">
+      <div class="convert-eyebrow">MY SOLUTION</div>
+      <h3 class="convert-hook" id="rHook"></h3>
+      <div class="convert-icons">
+        <div class="c-icon"><span class="c-emoji">🩹</span><span class="c-label">상해</span></div>
+        <div class="c-icon"><span class="c-emoji">🚑</span><span class="c-label">응급실</span></div>
+        <div class="c-icon"><span class="c-emoji">🛏️</span><span class="c-label">입원</span></div>
       </div>
-      <p class="reward-banner-title">지금 신청하면 <span>네이버페이 1만원권</span> 드려요</p>
-      <p class="reward-banner-sub">1분 인증콜만 완료하면 바로 지급돼요</p>
-    </div>
-    
-    <div class="cta-block">
-      <p class="cta-sub">강요 없어요. 지금 내 보장 상태만 가볍게 확인하는 거예요.</p>
+      <p class="convert-body" id="rSolution"></p>
+      <div class="convert-divider"></div>
+      <div class="convert-event">
+        <span class="event-tag">EVENT</span>
+        <p class="event-text">지금 점검 신청하면 <strong>네이버페이 1만원</strong> 드려요</p>
+      </div>
       <button class="btn-primary" onclick="goTo('form')">무료 보장공백 점검 신청하기</button>
+      <p class="convert-cta-sub">강요 없어요. 지금 내 보장 상태만 가볍게 확인하는 거예요.</p>
     </div>
     <div class="notice-text">
       <p class="notice-title">&lt;유의사항&gt;</p>
@@ -257,22 +251,28 @@ const tips = [
 const types = {
   EPF:{name:'갓생 폭주 마스터', emoji:'🔥', code:'EPF', hi:[1,3], tipIntro:'일정 빡빡한 당신, 이 2개는 꼭 챙기세요',
     desc:'여름 스케줄표만 봐도 남들은 숨이 찬다. 근데 나는 "이거밖에 없어?" 소리 나오는 사람. 계획도 완벽, 실행은 광속, 텐션은 무한. 여름을 4번 사는 유형이에요.',
-    solution:'다 챙기는 갓생러도 \'보장 스케줄\'은 놓친 적 있죠. 활동량이 많을수록 상해·응급 보장이 비어있으면 훅 갑니다. 이건 미리 캘린더에 넣어두세요.'},
+    hook:'다치면, 그 텐션 <strong>다 꺾여요</strong>',
+    solution:'액티비티로 꽉 찬 스케줄, 그만큼 다치거나 응급실 갈 확률도 높다는 뜻이에요. <strong>상해·응급실 보장</strong>, 지금 어느 정도인지 알고 계세요?'},
   EPC:{name:'계획적 안전주의자', emoji:'🛡️', code:'EPC', hi:[1,2], tipIntro:'이미 조심스러운 편이지만, 이건 놓치기 쉬워요',
     desc:'"재밌게, 근데 안전하게." 후기 3페이지는 기본, 사고율 통계까지 스크린샷 저장. 즉흥적으로 나가도 리스크는 절대 안 안고 가는 진짜 어른 부캐예요.',
-    solution:'안전에 진심이라면 보장도 진심이어야죠. 가입한 지 오래됐다면 지금 조건과 다를 수 있어요. 5년 넘었다면 무조건 점검이에요.'},
+    hook:'안전은 챙겼는데, <strong>보장은요?</strong>',
+    solution:'안전은 이미 챙기는 편이지만, 막상 <strong>상해·응급실</strong> 상황에서 지금 보장으로 충분할지는 다른 문제예요. 가입한 지 오래됐다면 확인해볼 타이밍.'},
   EUF:{name:'즉흥 도파민 폭주족', emoji:'⚡', code:'EUF', hi:[2,3], tipIntro:'즉흥적으로 움직이는 당신, 이것만은 미리 챙기세요',
     desc:'"가자!" 한 마디로 인생이 굴러가는 사람. 계획? 그건 재미없는 사람들 얘기. 여행지에서 새벽 3시에 낯선 클럽 발견 → 그냥 들어감. 그게 나예요.',
-    solution:'저지르는 만큼 예상 밖 상황도 많아지죠. 응급실 갈 일 생겼을 때 "아 그때 보장 확인할걸..." 안 하려면, 지금이에요.'},
+    hook:'저지르는 만큼, <strong>위험도 커요</strong>',
+    solution:'저지르는 만큼 다치거나 응급실 갈 확률도 남들보다 높다는 거, 인정하시죠? <strong>상해·입원 보장</strong>, 지금 어떤 상태인지 모르고 계신 경우가 많아요.'},
   IPF:{name:'홈 챌린저', emoji:'🎮', code:'IPF', hi:[4,1], tipIntro:'집에서도 텐션 유지하려면 이거 체크',
     desc:'집 = 놀이터. 홈파티·홈트·홈베이킹부터 갑자기 시작한 새벽 챌린지까지 다 시도하는 실내파 만렙. 밖에 안 나가도 하루가 짧은 사람이에요.',
-    solution:'집에서도 사고는 나요. 실내 화상, 미끄러짐, 냉방병… 의외로 보장 안 되는 케이스 많아요. 집순이라도 이건 챙기세요.'},
+    hook:'집에서도, <strong>다치는 사람 많아요</strong>',
+    solution:'집에서도 다치는 사람 많아요. 낙상, 화상, 미끄러짐… 실내 <strong>상해나 응급실</strong> 행도 의외로 자주 생겨요. 지금 보장 상태 확인해본 적 있으세요?'},
   IPC:{name:'방콕 마스터 클래스', emoji:'🧊', code:'IPC', hi:[4], tipIntro:'방콕러도 이건 은근 잘 놓쳐요',
     desc:'에어컨 26도, 커튼 반쯤, 얼음물 옆에. 완벽한 환경 세팅에 진심인 진정한 여름 고수. 밖은 지옥, 안은 천국이라는 걸 몸으로 아는 사람이에요.',
-    solution:'방콕도 계획적으로 하는 당신, 보장 계획도 세워두면 완벽하죠. 혹시 모를 상황을 위한 최소한의 안전망, 5분이면 점검 끝나요.'},
+    hook:'방심한 순간, <strong>누구나 다쳐요</strong>',
+    solution:'안 나가니까 안전할 거라 생각하지만, 방심한 순간 다치거나 갑자기 <strong>입원</strong>하는 일은 누구에게나 생겨요. <strong>상해·응급실 보장</strong>, 5분이면 점검 끝나요.'},
   IUC:{name:'궁극의 이불 요새', emoji:'🛌', code:'IUC', hi:[4], tipIntro:'이불 밖은 위험해도, 이건 알아두세요',
     desc:'"이불 밖은 위험해"라는 명언을 몸소 증명하는 유형. 배달앱과 OTT로 완성되는 나의 여름. 아무것도 안 하는데 뭔가 행복한 궁극의 물멍형이에요.',
-    solution:'이불 밖이 위험한 만큼, 이불 안에도 대비는 필요해요. 예상 밖의 순간은 실내에서도 옵니다. 조용히, 미리, 확인만 하면 돼요.'},
+    hook:'이불 안에도, <strong>대비는 필요해요</strong>',
+    solution:'이불 밖은 위험해도, 인생은 예상 밖의 일들로 가득하죠. <strong>상해나 응급실, 입원</strong> 같은 순간은 방 안에서도 옵니다. 지금 보장 상태만 확인해보는 건 어때요?'},
 };
 
 let current = 0;
@@ -351,7 +351,8 @@ function showResult(){
   document.getElementById('rDesc').textContent = t.desc;
   document.getElementById('rTipIntroName').textContent = t.name;
   document.getElementById('rTipIntro').textContent = t.tipIntro;
-  document.getElementById('rSolution').textContent = t.solution;
+  document.getElementById('rHook').innerHTML = t.hook;
+  document.getElementById('rSolution').innerHTML = t.solution;
   const list = document.getElementById('tipsList');
   list.innerHTML='';
   tips.forEach(tip=>{
