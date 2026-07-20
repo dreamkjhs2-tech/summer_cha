@@ -7,16 +7,69 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700;900&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#16232B;--bg:#FFF9EE;--coral:#FF6452;--coral-dark:#E44A38;--sun:#FFC847;--teal:#0B5F55;--teal-soft:#CDEDE6;--card:#FFFFFF;--line:#E8DECC;}
+/* 🎨 동양생명 수호천사 브랜드 스카이블루(#0094C8) 테마 시스템 구축 */
+:root{
+  --ink:#16232B;
+  --bg:#FFF9EE;
+  --coral:#0094C8; 
+  --coral-dark:#007AA8; 
+  --sun:#FFC847;
+  --teal:#005A78; 
+  --teal-soft:#E1F3F8; 
+  --card:#FFFFFF;
+  --line:#E2EDF3;
+}
 *{box-sizing:border-box;}
 html,body{margin:0;padding:0;}
 body{background:var(--bg);color:var(--ink);font-family:'Noto Sans KR',sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;justify-content:center;}
-.app{width:100%;max-width:480px;min-height:100vh;background:var(--bg);position:relative;overflow:hidden;}
-.screen{display:none;flex-direction:column;min-height:100vh;padding:28px 24px 40px;animation:fadeIn .45s ease;}
+.app{width:100%;max-width:480px;min-height:100vh;background:var(--bg);position:relative;overflow:hidden;padding-top:60px;} 
+
+/* 고정 상단 헤더 */
+.app-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  z-index: 10;
+}
+.header-left {
+  position: absolute;
+  left: 16px;
+  display: flex;
+  align-items: center;
+}
+.header-title {
+  font-family: 'Jua', sans-serif;
+  font-size: 19px;
+  color: var(--coral);
+  letter-spacing: -0.02em;
+}
+.btn-header-back {
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: var(--ink);
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.screen{display:none;flex-direction:column;min-height:calc(100vh - 60px);padding:20px 24px 40px;animation:fadeIn .45s ease;}
 .screen.active{display:flex;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 @media (prefers-reduced-motion:reduce){.screen{animation:none;}}
-.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;color:var(--teal);font-weight:600;text-transform:uppercase;margin-bottom:6px;}
+
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;color:var(--coral-dark);font-weight:600;text-transform:uppercase;margin-bottom:6px;}
 h1,h2,h3{font-family:'Jua',sans-serif;font-weight:400;margin:0;}
 #screen-intro{justify-content:space-between;transform:translateZ(0);}
 .intro-top{margin-top:12px;text-align:center;}
@@ -24,47 +77,52 @@ h1,h2,h3{font-family:'Jua',sans-serif;font-weight:400;margin:0;}
 .intro-title em{font-style:normal;color:var(--coral);}
 .intro-sub{font-size:15px;color:#4B5B58;margin-top:12px;line-height:1.6;}
 .intro-meta { display: flex; gap: 10px; justify-content: center; margin-top: 16px; }
-.meta-chip{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13px;font-weight:500;color:var(--teal);}
+.meta-chip{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13px;font-weight:500;color:var(--coral-dark);}
 .intro-scene-wrap{flex:1;display:flex;align-items:center;justify-content:center;margin:14px 0;}
-.intro-scene{width:100%;height:260px;border-radius:24px;overflow:hidden;box-shadow:0 12px 28px -10px rgba(22,35,43,.25);position:relative;background:#FFF9EE;}
+.intro-scene{width:100%;height:260px;border-radius:24px;overflow:hidden;box-shadow:0 12px 28px -10px rgba(0,148,200,.15);position:relative;background:#FFF9EE;}
 .intro-scene img{width:100%;height:100%;display:block;object-fit:cover;}
-.btn-primary{width:100%;border:none;border-radius:16px;padding:18px 20px;background:var(--coral);color:#fff;font-size:17px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer;box-shadow:0 10px 24px -8px rgba(228,74,56,.55);transition:transform .15s ease;}
+.btn-primary{width:100%;border:none;border-radius:16px;padding:18px 20px;background:var(--coral);color:#fff;font-size:18px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer;box-shadow:0 10px 24px -8px rgba(0,148,200,.4);transition:transform .15s ease;text-align:center;display:block;text-decoration:none;}
 .btn-primary:active{transform:scale(.97);}
 .intro-foot{text-align:center;font-size:12.5px;color:#7C8B87;margin-top:12px;}
+
 #screen-quiz{gap:0;justify-content:space-between;}
-.quiz-header{display:flex;flex-direction:column;}
-.progress-wrap{display:flex;gap:6px;margin-bottom:20px;}
+.quiz-header{display:flex;flex-direction:column;position:relative;}
+.progress-wrap{display:flex;gap:6px;width:100%;margin-bottom:16px;}
 .dot{flex:1;height:5px;border-radius:999px;background:var(--line);overflow:hidden;}
-.dot i{display:block;height:100%;width:0%;background:var(--teal);transition:width .3s ease;}
-.quiz-image{width:100%;height:220px;border-radius:20px;overflow:hidden;margin:4px 0 20px;box-shadow:0 12px 26px -12px rgba(22,35,43,.3);background:#FFF9EE;}
+.dot i{display:block;height:100%;width:0%;background:var(--coral);transition:width .3s ease;}
+.quiz-image{width:100%;height:220px;border-radius:20px;overflow:hidden;margin:4px 0 20px;box-shadow:0 12px 26px -12px rgba(22,35,43,.2);background:#FFF9EE;}
 .quiz-image img{width:100%;height:100%;display:block;object-fit:cover;}
 .q-axis{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--coral);font-weight:600;margin-bottom:6px;}
 .q-text{font-size:20px;line-height:1.45;font-weight:700;margin-bottom:16px;min-height:58px;}
 .options{display:flex;flex-direction:column;gap:12px;margin-bottom:16px;}
 .option-btn{display:flex;align-items:center;justify-content:flex-start;text-align:left;border:2px solid var(--line);background:var(--card);border-radius:16px;padding:16px 20px;font-size:15px;font-weight:600;line-height:1.4;color:var(--ink);cursor:pointer;transition:.15s ease;font-family:'Noto Sans KR',sans-serif;width:100%;box-shadow:0 4px 10px rgba(0,0,0,0.02);}
 .option-btn .opt-emoji{font-size:20px;margin-right:12px;flex-shrink:0;}
-.option-btn:active{transform:scale(.98);background:var(--teal-soft);border-color:var(--teal);}
+.option-btn:active{transform:scale(.98);background:var(--teal-soft);border-color:var(--coral);}
 .quiz-foot{text-align:center;font-size:12.5px;color:#7C8B87;margin-top:auto;}
+#screen-done{align-items:center;justify-content:center;text-align:center;gap:14px;}
+.done-emoji{font-size:54px;}
+.done-title{font-size:22px;}
+.done-sub{font-size:14px;color:#5C6B67;line-height:1.6;}
 #screen-loading{align-items:center;justify-content:center;text-align:center;gap:18px;}
 .load-ring{width:88px;height:88px;border-radius:50%;border:6px solid var(--teal-soft);border-top-color:var(--coral);animation:spin 0.9s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
-.load-text{font-size:16px;font-weight:700;color:var(--teal);}
+.load-text{font-size:16px;font-weight:700;color:var(--coral-dark);}
 .load-sub{font-size:13px;color:#7C8B87;}
+
 #screen-result{padding-top:20px;gap:26px;}
-.result-card{border-radius:24px;padding:0 0 26px;text-align:center;position:relative;overflow:hidden;background:var(--card);box-shadow:0 18px 40px -16px rgba(22,35,43,.35);}
+.result-card{border-radius:24px;padding:0 0 26px;text-align:center;position:relative;overflow:hidden;background:var(--card);box-shadow:0 18px 40px -16px rgba(0,148,200,.25);}
 .result-visual{position:relative;height:280px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#F7F9F8;}
 .result-visual img{width:100%;height:100%;object-fit:cover;display:block;}
 .tape{position:absolute;top:14px;left:50%;transform:translateX(-50%) rotate(-3deg);width:84px;height:24px;background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.7);border-radius:3px;z-index:3;backdrop-filter:blur(1px);}
 .result-info{padding:22px 24px 0;}
-.result-eyebrow{font-size:15px;font-weight:700;color:var(--teal);margin-top:0;}
+.result-eyebrow{font-size:15px;font-weight:700;color:var(--coral-dark);margin-top:0;}
 .result-title{font-size:30px;color:var(--ink);margin:6px 0 6px;line-height:1.25;}
-.result-code{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.15em;color:var(--teal);font-weight:600;}
-.result-desc{font-size:14.5px;line-height:1.7;color:#37453F;margin-top:14px;padding:0 2px;}
+.result-desc{font-size:14.5px;line-height:1.7;color:#37453F;margin-top:14px;padding:0 2px;text-align:left;}
 .section-title{font-size:19px;margin-bottom:4px;}
-.section-title span { color: var(--coral); }
+.section-title span { color: var(--coral-dark); }
 .tips-intro{font-size:13.5px;color:#5C6B67;margin-bottom:16px;}
 .tip-item{background:var(--card);border-radius:14px;margin-bottom:10px;overflow:hidden;border:1px solid var(--line);}
-.tip-item.hi{border-color:var(--coral);box-shadow:0 4px 14px -6px rgba(228,74,56,.3);}
+.tip-item.hi{border-color:var(--coral);box-shadow:0 4px 14px -6px rgba(0,148,200,.2);}
 .tip-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;cursor:pointer;user-select:none;}
 .tip-head-left{display:flex;align-items:center;gap:8px;}
 .tip-badge{background:var(--coral);color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;letter-spacing:.02em;}
@@ -75,52 +133,71 @@ h1,h2,h3{font-family:'Jua',sans-serif;font-weight:400;margin:0;}
 .tip-item.open .tip-body{max-height:400px;padding:0 16px 14px;}
 .tip-body ul{margin:0;padding-left:18px;}
 .tip-body li{font-size:13px;line-height:1.7;color:#37453F;margin-bottom:4px;}
-.convert-card{background:var(--card);border-radius:20px;padding:26px 20px 22px;position:relative;border:1px solid var(--line);box-shadow:0 10px 26px -14px rgba(22,35,43,.2);overflow:hidden;}
+
+/* 컨버전 유도 카드 */
+.convert-card{background:var(--card);border-radius:20px;padding:26px 20px 22px;position:relative;border:1px solid var(--line);box-shadow:0 10px 26px -14px rgba(0,148,200,0.15);overflow:hidden;}
 .convert-card::before{content:"";position:absolute;top:0;left:0;width:6px;height:100%;background:var(--coral);}
-.convert-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--coral);font-weight:700;margin:0 0 10px;padding-left:8px;}
+.convert-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.04em;color:var(--coral-dark);font-weight:700;margin:0 0 10px;padding-left:8px;}
 .convert-hook{font-family:'Jua',sans-serif;font-size:23px;line-height:1.35;color:var(--ink);margin:0 0 14px;padding-left:8px;}
 .convert-hook strong{color:var(--coral-dark);}
 .convert-icons{display:flex;gap:8px;margin-bottom:16px;padding-left:8px;}
-.c-icon{flex:1;background:#FFF1EE;border-radius:12px;padding:10px 6px;text-align:center;}
+.c-icon{flex:1;background:#EBF7FA;border-radius:12px;padding:10px 6px;text-align:center;}
 .c-icon .c-emoji{font-size:19px;display:block;margin-bottom:4px;}
 .c-icon .c-label{font-size:11px;font-weight:700;color:var(--coral-dark);}
-.convert-body{font-size:13.5px;line-height:1.75;color:#37453F;margin:0 0 18px;padding-left:8px;}
+.convert-body{font-size:13.5px;line-height:1.75;color:#37453F;margin:0 0 18px;padding-left:8px;text-align:left;}
 .convert-body strong{color:var(--coral-dark);font-weight:800;}
 .convert-divider{height:1px;background:var(--line);margin:0 8px 16px;}
-.convert-event{display:flex;align-items:center;gap:10px;background:#F0FAF4;border-radius:14px;padding:12px 14px;margin:0 8px 18px;}
+.convert-event{display:flex;align-items:center;gap:10px;background:#F0FAF4;border-radius:14px;padding:12px 14px;margin:0 8px 6px;} 
 .event-tag{background:#03C75A;color:#fff;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.06em;padding:4px 8px;border-radius:6px;flex-shrink:0;}
 .event-text{font-size:12.5px;font-weight:600;color:#16232B;margin:0;line-height:1.5;}
 .event-text strong{color:#029443;}
-.convert-card .btn-primary{margin:0 8px;width:calc(100% - 16px);}
-.convert-cta-sub{font-size:12px;color:#7C8B87;text-align:center;margin:10px 8px 0;line-height:1.5;}
 
-.cta-block{display:flex;flex-direction:column;gap:10px;}
-.cta-sub{font-size:13px;color:#5C6B67;text-align:center;margin:0;line-height:1.55;}
-.notice-text{padding:4px 4px 0;}
+.event-condition-text { font-size:11px; color:#8A9895; text-align:left; margin:0 8px 16px; padding-left:4px; font-weight:500; }
+.convert-card .btn-primary{margin:0 8px;width:calc(100% - 16px);}
+
+/* 🌟 [디자인 리뉴얼] 무식한 큰 네모 상자 대신 미니멀한 알약 모양의 슬림 칩 공유 버튼 적용 */
+.copy-section { display: flex; justify-content: center; margin: 4px 0 12px; }
+.btn-link-copy { 
+  display: inline-flex; 
+  align-items: center; 
+  gap: 6px; 
+  border: 1px solid var(--coral); 
+  border-radius: 999px; /* 완벽한 라운드 알약 형태 */
+  padding: 8px 18px; 
+  background: var(--teal-soft); 
+  color: var(--teal); 
+  font-size: 13.5px; 
+  font-weight: 700; 
+  font-family: 'Noto Sans KR', sans-serif; 
+  cursor: pointer; 
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 148, 200, 0.06);
+}
+.btn-link-copy:active { 
+  transform: scale(0.96); 
+  background: var(--coral); 
+  color: #fff; 
+}
+.btn-link-copy .copy-icon { font-size: 14px; }
+
+.notice-text{padding:8px 4px 0; border-top:1px dashed var(--line); margin-top:8px;}
 .notice-title{font-size:14px;font-weight:700;color:#16232B;margin:0 0 8px;}
-.notice-text p:not(.notice-title){margin:0 0 7px;font-size:13px;line-height:1.7;color:#16232B;}
-#screen-form{gap:20px;}
-.form-title{font-size:22px;line-height:1.4;}
-.form-sub{font-size:13.5px;color:#5C6B67;margin-top:6px;}
-.field{display:flex;flex-direction:column;gap:6px;margin-top:6px;}
-.field label{font-size:13px;font-weight:700;color:var(--teal);}
-.field input{border:2px solid var(--line);border-radius:12px;padding:14px 14px;font-size:15px;font-family:'Noto Sans KR',sans-serif;background:#fff;}
-.field input:focus{outline:2px solid var(--coral);border-color:var(--coral);}
-.consent{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:#5C6B67;margin-top:4px;}
-.consent input{margin-top:3px;}
-#screen-done{align-items:center;justify-content:center;text-align:center;gap:14px;}
-.done-emoji{font-size:54px;}
-.done-title{font-size:22px;}
-.done-sub{font-size:14px;color:#5C6B67;line-height:1.6;}
-.back-link{font-size:13px;color:#7C8B87;text-decoration:underline;background:none;border:none;cursor:pointer;margin-top:6px;font-family:'Noto Sans KR',sans-serif;align-self:flex-start;}
+.notice-text p:not(.notice-title){margin:0 0 7px;font-size:13px;line-height:1.7;color:#7C8B87;}
 </style>
 </head>
 <body>
 <div class="app">
+  
+  <header class="app-header">
+    <div class="header-left" id="headerLeftBox"></div>
+    <div class="header-title" id="headerTitleText">수호천사 동양생명</div>
+  </header>
+
+  <!-- 메인페이지(Intro) 화면 구성 -->
   <section id="screen-intro" class="screen active">
     <div class="intro-top">
       <div class="eyebrow">여름나기 부캐 테스트</div>
-      <h1 class="intro-title">무더운 여름,<br>나의 <em>여름나기 부캐</em>는?</h1>
+      <h1 class="intro-title">무더운...<br>나의 <em>여름나기 부캐</em>는?</h1>
       <p class="intro-sub">간단한 질문으로 알아보는 여름나기 성향 테스트.<br>나의 여름 부캐 알아보고, 경품까지 받아가세요!</p>
       <div class="intro-meta">
         <span class="meta-chip">⏱ 1분 완성</span>
@@ -129,7 +206,6 @@ h1,h2,h3{font-family:'Jua',sans-serif;font-weight:400;margin:0;}
     </div>
     <div class="intro-scene-wrap">
       <div class="intro-scene">
-        <!-- 1. 메인 배너 이미지 경로 변경 완료 -->
         <img src="images/main-banner.png" alt="6가지 여름 부캐">
       </div>
     </div>
@@ -137,7 +213,15 @@ h1,h2,h3{font-family:'Jua',sans-serif;font-weight:400;margin:0;}
       <button class="btn-primary" onclick="goTo('quiz')">테스트 시작하기</button>
       <p class="intro-foot">나의 여름나기 부캐는 어떤 유형일까?</p>
     </div>
+    
+    <!-- 🌟 [메인페이지 피드백 반영] 메인 최하단에도 부담스럽지 않은 슬림형 링크 복사 칩 배치 -->
+    <div class="copy-section">
+      <button class="btn-link-copy" onclick="copyPageLink()">
+        <span class="copy-icon">🔗</span> 링크 복사하기
+      </button>
+    </div>
   </section>
+  
   <section id="screen-quiz" class="screen">
     <div class="quiz-header">
       <div class="progress-wrap" id="progressWrap"></div>
@@ -146,13 +230,15 @@ h1,h2,h3{font-family:'Jua',sans-serif;font-weight:400;margin:0;}
     </div>
     <div class="quiz-image" id="qImage"></div>
     <div class="options" id="qOptions"></div>
-    <div class="quiz-foot">답변을 선택하면 바로 다음 질문으로 넘어가요</div>
+    <div class="quiz-foot">답변을 선택하면 다음 질문으로 넘어가요</div>
   </section>
+  
   <section id="screen-loading" class="screen">
     <div class="load-ring"></div>
     <div class="load-text">당신의 여름 부캐 분석 중<span id="loadingDots">...</span></div>
     <div class="load-sub">고객님의 결과를 분석하고 있어요</div>
   </section>
+  
   <section id="screen-result" class="screen">
     <div class="result-card" id="resultCard">
       <div class="result-visual" id="rVisual">
@@ -161,17 +247,12 @@ h1,h2,h3{font-family:'Jua',sans-serif;font-weight:400;margin:0;}
       <div class="result-info">
         <div class="result-eyebrow">당신의 여름나기 부캐는</div>
         <h2 class="result-title" id="rTitle"></h2>
-        <div class="result-code" id="rCode"></div>        
         <p class="result-desc" id="rDesc"></p>
       </div>
     </div>
-    <div>
-      <h3 class="section-title"><span id="rTipIntroName"></span>을 위한 여름나기 꿀팁</h3>
-      <p class="tips-intro" id="rTipIntro"></p>
-      <div id="tipsList"></div>
-    </div>
+    
     <div class="convert-card">
-      <div class="convert-eyebrow">MY SOLUTION</div>
+      <div class="convert-eyebrow" id="rSolutionUserLabel"></div>
       <h3 class="convert-hook" id="rHook"></h3>
       <div class="convert-icons">
         <div class="c-icon"><span class="c-emoji">🩹</span><span class="c-label">상해</span></div>
@@ -184,9 +265,24 @@ h1,h2,h3{font-family:'Jua',sans-serif;font-weight:400;margin:0;}
         <span class="event-tag">EVENT</span>
         <p class="event-text">지금 점검 신청하면 <strong>네이버페이 1만원</strong> 드려요</p>
       </div>
-      <button class="btn-primary" onclick="goTo('form')">무료 보장공백 점검 신청하기</button>
-      <p class="convert-cta-sub">강요 없어요. 지금 내 보장 상태만 가볍게 확인하는 거예요.</p>
+      <p class="event-condition-text">* 고객등록 및 상품소개동의 시 제공</p>
+
+      <a href="https://www.myangel.co.kr/comm/go?p=LMS500" class="btn-primary" target="_blank">보장공백 점검 신청하기</a>
     </div>
+
+    <div>
+      <h3 class="section-title"><span id="rTipIntroName"></span>님을 위한 여름나기 꿀팁</h3>
+      <p class="tips-intro" id="rTipIntro"></p>
+      <div id="tipsList"></div>
+    </div>
+
+    <!-- 결과페이지 하단 알약 형태 링크 복사 칩 -->
+    <div class="copy-section">
+      <button class="btn-link-copy" onclick="copyPageLink()">
+        <span class="copy-icon">🔗</span> 링크 복사하기
+      </button>
+    </div>
+
     <div class="notice-text">
       <p class="notice-title">&lt;유의사항&gt;</p>
       <p>· 본 이벤트는 사전 안내 없이 조기 종료되거나 변경될 수 있습니다.</p>
@@ -196,21 +292,8 @@ h1,h2,h3{font-family:'Jua',sans-serif;font-weight:400;margin:0;}
       <p>· 보장 내용 및 가입 여부는 상담을 통해 개별 안내드립니다.</p>
     </div>
   </section>
-  <section id="screen-form" class="screen">
-    <button class="back-link" onclick="goTo('result')">← 결과로 돌아가기</button>
-    <h2 class="form-title">보장공백 점검, 1분이면 충분해요</h2>
-    <p class="form-sub">인증콜 완료 시 네이버페이 1만원권을 드려요.</p>
-    <div class="field"><label for="fName">이름</label><input id="fName" type="text" placeholder="홍길동"></div>
-    <div class="field"><label for="fPhone">연락처</label><input id="fPhone" type="tel" placeholder="010-0000-0000"></div>
-    <label class="consent"><input type="checkbox" id="fConsent"> 개인정보 수집·이용에 동의합니다. (점검 및 리워드 지급 목적)</label>
-    <button class="btn-primary" id="submitBtn" onclick="submitForm()">신청 완료하기</button>
-  </section>
-  <section id="screen-done" class="screen">
-    <div class="done-emoji">🎉</div>
-    <h2 class="done-title">신청 완료!</h2>
-    <p class="done-sub">담당자가 1분 인증콜로 연락드릴게요.<br>완료 후 네이버페이 1만원권이 지급돼요.</p>
-  </section>
 </div>
+
 <script>
 const questions = [
   {axis:'E/I', img:'wave',     text:'드디어 여름휴가. 눈 감으면 가장 먼저 떠오르는 장면은?', a:{emoji:'🏖️', label:'발끝에 닿는 파도, 흔들리는 파라솔 — 무조건 야외', v:'E'}, b:{emoji:'🎬', label:'커튼 치고 에어컨 빵빵, 넷플릭스 몰아보기가 진짜 휴가', v:'I'}},
@@ -221,7 +304,6 @@ const questions = [
   {axis:'F/C', img:'compass',  text:'낯선 도시, 지도에 없는 골목을 마주쳤을 때 나는?', a:{emoji:'🗺️', label:'지도 접고 발길 닿는 대로 걷는 게 여행이지', v:'F'}, b:{emoji:'📍', label:'별점 4.5 이상만, 검증된 루트로만 움직인다', v:'C'}},
 ];
 
-// 2. 퀴즈 중간 이미지 경로 변경 완료 (로컬 images 폴더 기준)
 const quizImages = {
   wave:     'images/wave.png',
   weekend:  'images/weekend.png',
@@ -231,7 +313,6 @@ const quizImages = {
   compass:  'images/compass.png',
 };
 
-// 3. 결과 캐릭터 이미지 경로 변경 완료 (로컬 images 폴더 기준)
 const resultImages = {
   EPF: 'images/epf.png',
   EPC: 'images/epc.png',
@@ -279,12 +360,32 @@ let current = 0;
 let answers = [];
 let finalUserType = "";
 
+function updateHeader(screenName) {
+  const leftBox = document.getElementById('headerLeftBox');
+  const titleText = document.getElementById('headerTitleText');
+  
+  leftBox.innerHTML = '';
+  
+  if (screenName === 'quiz') {
+    titleText.textContent = `여름나기 테스트 (Q0${current + 1})`;
+    if (current > 0) {
+      leftBox.innerHTML = `<button class="btn-header-back" onclick="backQuestion()">←</button>`;
+    }
+  } else {
+    titleText.innerHTML = `<span>수호천사 동양생명</span>`;
+  }
+}
+
 function goTo(name){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById('screen-'+name).classList.add('active');
+  const targetScreen = document.getElementById('screen-'+name);
+  if(targetScreen) targetScreen.classList.add('active');
   window.scrollTo(0,0);
+  
   if(name==='quiz'){current=0;answers=[];renderQuestion();}
+  updateHeader(name);
 }
+
 function renderProgress(){
   const wrap = document.getElementById('progressWrap');
   wrap.innerHTML='';
@@ -297,12 +398,16 @@ function renderProgress(){
     wrap.appendChild(d);
   });
 }
+
 function renderQuestion(){
   renderProgress();
   const q = questions[current];
   document.getElementById('qImage').innerHTML = `<img src="${quizImages[q.img]}" alt="Q${current+1}">`;
   document.getElementById('qAxis').textContent = `Q${current+1} / ${questions.length}`;
   document.getElementById('qText').textContent = q.text;
+  
+  updateHeader('quiz');
+
   const opts = document.getElementById('qOptions');
   opts.innerHTML='';
   [q.a,q.b].forEach(opt=>{
@@ -313,6 +418,7 @@ function renderQuestion(){
     opts.appendChild(btn);
   });
 }
+
 function selectAnswer(v){
   answers.push(v);
   current++;
@@ -325,6 +431,15 @@ function selectAnswer(v){
     setTimeout(()=>{clearInterval(dotTimer);showResult();},1800);
   }
 }
+
+function backQuestion(){
+  if(current > 0) {
+    current--;
+    answers.pop();
+    renderQuestion();
+  }
+}
+
 function computeAxis(vals, a, b){
   const countA = vals.filter(v=>v===a).length;
   return countA >= vals.length/2 ? a : b;
@@ -353,6 +468,9 @@ function showResult(){
   document.getElementById('rTipIntro').textContent = t.tipIntro;
   document.getElementById('rHook').innerHTML = t.hook;
   document.getElementById('rSolution').innerHTML = t.solution;
+  
+  document.getElementById('rSolutionUserLabel').innerHTML = `${t.emoji} <strong>${t.name}님</strong>을 위한 안심 제안`;
+
   const list = document.getElementById('tipsList');
   list.innerHTML='';
   tips.forEach(tip=>{
@@ -366,44 +484,17 @@ function showResult(){
   goTo('result');
 }
 
-function submitForm(){
-  const name = document.getElementById('fName').value.trim();
-  const phone = document.getElementById('fPhone').value.trim();
-  const consent = document.getElementById('fConsent').checked;
-  const btn = document.getElementById('submitBtn');
-
-  if(!name || !phone){alert('이름과 연락처를 입력해주세요.');return;}
-  if(!consent){alert('개인정보 수집·이용에 동의해주세요.');return;}
+function copyPageLink(){
+  const dummy = document.createElement('input');
+  const text = window.location.href;
   
-  btn.disabled = true;
-  btn.textContent = "신청 처리 중...";
-
-  const formData = {
-    "이름": name,
-    "연락처": phone,
-    "부캐결과": finalUserType,
-    "신청일시": new Date().toLocaleString('ko-KR')
-  };
-
-  // 💡 SheetDB 주소를 만들어서 발급받은 실제 API 키값으로 교체하는 구역
-  fetch('https://sheetdb.io/api/v1/내_SheetDB_API_주소', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ data: [formData] })
-  })
-  .then((response) => response.json())
-  .then((data) => {
-    console.log('DB 저장 완료:', data);
-    goTo('done');
-  })
-  .catch((error) => {
-    console.error('에러 발생:', error);
-    // API 연결 전 테스트용 마케팅 퍼널 예외 처리
-    goTo('done');
-  });
+  document.body.appendChild(dummy);
+  dummy.value = text;
+  dummy.select();
+  document.execCommand('copy');
+  document.body.removeChild(dummy);
+  
+  alert('링크가 복사되었습니다! 🔗\n메신저를 통해 친구에게 공유해 보세요.');
 }
 </script>
 </body>
