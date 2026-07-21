@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>이 여름, 나의 부캐는?</title>
+<title>무더운 여름, 나의 부캐는?</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700;900&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
@@ -47,7 +47,7 @@ body{background:var(--bg);color:var(--ink);font-family:'Noto Sans KR',sans-serif
 }
 .header-title {
   font-family: 'Jua', sans-serif;
-  font-size: 19px;
+  font-size: 20px; /* 19px -> 20px 스케일 업 */
   color: var(--coral);
   letter-spacing: -0.02em;
 }
@@ -69,104 +69,108 @@ body{background:var(--bg);color:var(--ink);font-family:'Noto Sans KR',sans-serif
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 @media (prefers-reduced-motion:reduce){.screen{animation:none;}}
 
-.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;color:var(--coral-dark);font-weight:600;text-transform:uppercase;margin-bottom:6px;}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.12em;color:var(--coral-dark);font-weight:600;text-transform:uppercase;margin-bottom:6px;}
 h1,h2,h3{font-family:'Jua',sans-serif;font-weight:400;margin:0;}
 #screen-intro{justify-content:space-between;transform:translateZ(0);}
 .intro-top{margin-top:12px;text-align:center;}
-.intro-title{font-size:36px;line-height:1.25;color:var(--ink);margin-top:10px;}
+.intro-title{font-size:38px;line-height:1.25;color:var(--ink);margin-top:10px;} /* 36px -> 38px 스케일 업 */
 .intro-title em{font-style:normal;color:var(--coral);}
-.intro-sub{font-size:15px;color:#4B5B58;margin-top:12px;line-height:1.6;}
+.intro-sub{font-size:16px;color:#4B5B58;margin-top:12px;line-height:1.6;} /* 15px -> 16px 스케일 업 */
 .intro-meta { display: flex; gap: 10px; justify-content: center; margin-top: 16px; }
-.meta-chip{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13px;font-weight:500;color:var(--coral-dark);}
+.meta-chip{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 16px;font-size:14px;font-weight:500;color:var(--coral-dark);} /* 13px -> 14px 스케일 업 */
 .intro-scene-wrap{flex:1;display:flex;align-items:center;justify-content:center;margin:14px 0;}
 .intro-scene{width:100%;height:260px;border-radius:24px;overflow:hidden;box-shadow:0 12px 28px -10px rgba(0,148,200,.15);position:relative;background:#FFF9EE;}
 .intro-scene img{width:100%;height:100%;display:block;object-fit:cover;}
 .btn-primary{width:100%;border:none;border-radius:16px;padding:18px 20px;background:var(--coral);color:#fff;font-size:18px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer;box-shadow:0 10px 24px -8px rgba(0,148,200,.4);transition:transform .15s ease;text-align:center;display:block;text-decoration:none;}
 .btn-primary:active{transform:scale(.97);}
-.intro-foot{text-align:center;font-size:12.5px;color:#7C8B87;margin-top:12px;}
+.intro-foot{text-align:center;font-size:13.5px;color:#7C8B87;margin-top:12px;} /* 12.5px -> 13.5px 스케일 업 */
 
 #screen-quiz{gap:0;justify-content:space-between;}
 .quiz-header{display:flex;flex-direction:column;position:relative;}
 .progress-wrap{display:flex;gap:6px;width:100%;margin-bottom:16px;}
-.dot{flex:1;height:5px;border-radius:999px;background:var(--line);overflow:hidden;}
+.dot{flex:1;height:6px;border-radius:999px;background:var(--line);overflow:hidden;} /* 5px -> 6px 스케일 업 */
 .dot i{display:block;height:100%;width:0%;background:var(--coral);transition:width .3s ease;}
 .quiz-image{width:100%;height:220px;border-radius:20px;overflow:hidden;margin:4px 0 20px;box-shadow:0 12px 26px -12px rgba(22,35,43,.2);background:#FFF9EE;}
 .quiz-image img{width:100%;height:100%;display:block;object-fit:cover;}
-.q-axis{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--coral);font-weight:600;margin-bottom:6px;}
-.q-text{font-size:20px;line-height:1.45;font-weight:700;margin-bottom:16px;min-height:58px;}
+.q-axis{font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--coral);font-weight:600;margin-bottom:6px;} /* 13px -> 14px 스케일 업 */
+.q-text{font-size:21px;line-height:1.45;font-weight:700;margin-bottom:16px;min-height:58px;} /* 20px -> 21px 스케일 업 */
 .options{display:flex;flex-direction:column;gap:12px;margin-bottom:16px;}
-.option-btn{display:flex;align-items:center;justify-content:flex-start;text-align:left;border:2px solid var(--line);background:var(--card);border-radius:16px;padding:16px 20px;font-size:15px;font-weight:600;line-height:1.4;color:var(--ink);cursor:pointer;transition:.15s ease;font-family:'Noto Sans KR',sans-serif;width:100%;box-shadow:0 4px 10px rgba(0,0,0,0.02);}
-.option-btn .opt-emoji{font-size:20px;margin-right:12px;flex-shrink:0;}
+.option-btn{display:flex;align-items:center;justify-content:flex-start;text-align:left;border:2px solid var(--line);background:var(--card);border-radius:16px;padding:16px 20px;font-size:16px;font-weight:600;line-height:1.4;color:var(--ink);cursor:pointer;transition:.15s ease;font-family:'Noto Sans KR',sans-serif;width:100%;box-shadow:0 4px 10px rgba(0,0,0,0.02);} /* 15px -> 16px 스케일 업 */
+.option-btn .opt-emoji{font-size:22px;margin-right:12px;flex-shrink:0;}
 .option-btn:active{transform:scale(.98);background:var(--teal-soft);border-color:var(--coral);}
-.quiz-foot{text-align:center;font-size:12.5px;color:#7C8B87;margin-top:auto;}
+.quiz-foot{text-align:center;font-size:13.5px;color:#7C8B87;margin-top:auto;}
 #screen-done{align-items:center;justify-content:center;text-align:center;gap:14px;}
 .done-emoji{font-size:54px;}
-.done-title{font-size:22px;}
-.done-sub{font-size:14px;color:#5C6B67;line-height:1.6;}
+.done-title{font-size:24px;}
+.done-sub{font-size:15px;color:#5C6B67;line-height:1.6;}
 #screen-loading{align-items:center;justify-content:center;text-align:center;gap:18px;}
 .load-ring{width:88px;height:88px;border-radius:50%;border:6px solid var(--teal-soft);border-top-color:var(--coral);animation:spin 0.9s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
-.load-text{font-size:16px;font-weight:700;color:var(--coral-dark);}
-.load-sub{font-size:13px;color:#7C8B87;}
+.load-text{font-size:17px;font-weight:700;color:var(--coral-dark);}
+.load-sub{font-size:14px;color:#7C8B87;}
 
-#screen-result{padding-top:20px;gap:26px;}
-.result-card{border-radius:24px;padding:0 0 26px;text-align:center;position:relative;overflow:hidden;background:var(--card);box-shadow:0 18px 40px -16px rgba(0,148,200,.25);}
+/* ==========================================
+   📱 [핵심 보정] 결과 화면 모바일 폰트 가독성 대폭 상향
+   ========================================== */
+#screen-result{padding-top:20px;gap:28px;}
+.result-card{border-radius:24px;padding:0 0 28px;text-align:center;position:relative;overflow:hidden;background:var(--card);box-shadow:0 18px 40px -16px rgba(0,148,200,.25);}
 .result-visual{position:relative;height:280px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#F7F9F8;}
 .result-visual img{width:100%;height:100%;object-fit:cover;display:block;}
 .tape{position:absolute;top:14px;left:50%;transform:translateX(-50%) rotate(-3deg);width:84px;height:24px;background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.7);border-radius:3px;z-index:3;backdrop-filter:blur(1px);}
 .result-info{padding:22px 24px 0;}
-.result-eyebrow{font-size:15px;font-weight:700;color:var(--coral-dark);margin-top:0;}
-.result-title{font-size:30px;color:var(--ink);margin:6px 0 6px;line-height:1.25;}
-.result-desc{font-size:14.5px;line-height:1.7;color:#37453F;margin-top:14px;padding:0 2px;text-align:left;}
-.section-title{font-size:19px;margin-bottom:4px;}
+.result-eyebrow{font-size:16px;font-weight:700;color:var(--coral-dark);margin-top:0;} /* 15px -> 16px */
+.result-title{font-size:32px;color:var(--ink);margin:6px 0 6px;line-height:1.25;} /* 30px -> 32px */
+.result-desc{font-size:16px;line-height:1.75;color:#37453F;margin-top:16px;padding:0 2px;text-align:left;} /* 14.5px -> 16px (가독성 대폭 향상) */
+
+.section-title{font-size:21px;margin-bottom:6px;} /* 19px -> 21px */
 .section-title span { color: var(--coral-dark); }
-.tips-intro{font-size:13.5px;color:#5C6B67;margin-bottom:16px;}
+.tips-intro{font-size:15px;color:#5C6B67;margin-bottom:16px;line-height:1.5;} /* 13.5px -> 15px */
 .tip-item{background:var(--card);border-radius:14px;margin-bottom:10px;overflow:hidden;border:1px solid var(--line);}
 .tip-item.hi{border-color:var(--coral);box-shadow:0 4px 14px -6px rgba(0,148,200,.2);}
-.tip-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;cursor:pointer;user-select:none;}
+.tip-head{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;cursor:pointer;user-select:none;}
 .tip-head-left{display:flex;align-items:center;gap:8px;}
-.tip-badge{background:var(--coral);color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;letter-spacing:.02em;}
-.tip-title{font-size:14.5px;font-weight:700;color:var(--ink);}
-.tip-arrow{font-size:14px;color:#7C8B87;transition:transform .25s ease;}
+.tip-badge{background:var(--coral);color:#fff;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;letter-spacing:.02em;} /* 11px -> 12px */
+.tip-title{font-size:16px;font-weight:700;color:var(--ink);} /* 14.5px -> 16px */
+.tip-arrow{font-size:15px;color:#7C8B87;transition:transform .25s ease;}
 .tip-item.open .tip-arrow{transform:rotate(180deg);}
-.tip-body{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .25s ease;padding:0 16px;}
-.tip-item.open .tip-body{max-height:400px;padding:0 16px 14px;}
+.tip-body{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .25s ease;padding:0 18px;}
+.tip-item.open .tip-body{max-height:400px;padding:0 18px 16px;}
 .tip-body ul{margin:0;padding-left:18px;}
-.tip-body li{font-size:13px;line-height:1.7;color:#37453F;margin-bottom:4px;}
+.tip-body li{font-size:14.5px;line-height:1.75;color:#37453F;margin-bottom:6px;} /* 13px -> 14.5px */
 
-/* 컨버전 유도 카드 */
+/* 컨버전 유도 카드 가독성 보정 */
 .convert-card{background:var(--card);border-radius:20px;padding:26px 20px 22px;position:relative;border:1px solid var(--line);box-shadow:0 10px 26px -14px rgba(0,148,200,0.15);overflow:hidden;}
 .convert-card::before{content:"";position:absolute;top:0;left:0;width:6px;height:100%;background:var(--coral);}
-.convert-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.04em;color:var(--coral-dark);font-weight:700;margin:0 0 10px;padding-left:8px;}
-.convert-hook{font-family:'Jua',sans-serif;font-size:23px;line-height:1.35;color:var(--ink);margin:0 0 14px;padding-left:8px;}
+.convert-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.04em;color:var(--coral-dark);font-weight:700;margin:0 0 10px;padding-left:8px;} /* 12px -> 13px */
+.convert-hook{font-family:'Jua',sans-serif;font-size:25px;line-height:1.35;color:var(--ink);margin:0 0 14px;padding-left:8px;} /* 23px -> 25px */
 .convert-hook strong{color:var(--coral-dark);}
 .convert-icons{display:flex;gap:8px;margin-bottom:16px;padding-left:8px;}
-.c-icon{flex:1;background:#EBF7FA;border-radius:12px;padding:10px 6px;text-align:center;}
-.c-icon .c-emoji{font-size:19px;display:block;margin-bottom:4px;}
-.c-icon .c-label{font-size:11px;font-weight:700;color:var(--coral-dark);}
-.convert-body{font-size:13.5px;line-height:1.75;color:#37453F;margin:0 0 18px;padding-left:8px;text-align:left;}
+.c-icon{flex:1;background:#EBF7FA;border-radius:12px;padding:12px 6px;text-align:center;}
+.c-icon .c-emoji{font-size:22px;display:block;margin-bottom:4px;}
+.c-icon .c-label{font-size:12px;font-weight:700;color:var(--coral-dark);} /* 11px -> 12px */
+.convert-body{font-size:15px;line-height:1.75;color:#37453F;margin:0 0 18px;padding-left:8px;text-align:left;} /* 13.5px -> 15px */
 .convert-body strong{color:var(--coral-dark);font-weight:800;}
 .convert-divider{height:1px;background:var(--line);margin:0 8px 16px;}
-.convert-event{display:flex;align-items:center;gap:10px;background:#F0FAF4;border-radius:14px;padding:12px 14px;margin:0 8px 6px;} 
-.event-tag{background:#03C75A;color:#fff;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.06em;padding:4px 8px;border-radius:6px;flex-shrink:0;}
-.event-text{font-size:12.5px;font-weight:600;color:#16232B;margin:0;line-height:1.5;}
+.convert-event{display:flex;align-items:center;gap:10px;background:#F0FAF4;border-radius:14px;padding:14px 14px;margin:0 8px 6px;} 
+.event-tag{background:#03C75A;color:#fff;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.06em;padding:4px 8px;border-radius:6px;flex-shrink:0;} /* 10px -> 11px */
+.event-text{font-size:14px;font-weight:600;color:#16232B;margin:0;line-height:1.5;} /* 12.5px -> 14px */
 .event-text strong{color:#029443;}
 
-.event-condition-text { font-size:11px; color:#8A9895; text-align:left; margin:0 8px 16px; padding-left:4px; font-weight:500; }
+.event-condition-text { font-size:12px; color:#8A9895; text-align:left; margin:0 8px 16px; padding-left:4px; font-weight:500; } /* 11px -> 12px */
 .convert-card .btn-primary{margin:0 8px;width:calc(100% - 16px);}
 
-/* 🌟 [디자인 리뉴얼] 무식한 큰 네모 상자 대신 미니멀한 알약 모양의 슬림 칩 공유 버튼 적용 */
-.copy-section { display: flex; justify-content: center; margin: 4px 0 12px; }
+/* 알약 형태 링크 복사 버튼 */
+.copy-section { display: flex; justify-content: center; margin: 6px 0 14px; }
 .btn-link-copy { 
   display: inline-flex; 
   align-items: center; 
   gap: 6px; 
   border: 1px solid var(--coral); 
-  border-radius: 999px; /* 완벽한 라운드 알약 형태 */
-  padding: 8px 18px; 
+  border-radius: 999px; 
+  padding: 10px 20px; 
   background: var(--teal-soft); 
   color: var(--teal); 
-  font-size: 13.5px; 
+  font-size: 14.5px; /* 13.5px -> 14.5px */
   font-weight: 700; 
   font-family: 'Noto Sans KR', sans-serif; 
   cursor: pointer; 
@@ -178,11 +182,11 @@ h1,h2,h3{font-family:'Jua',sans-serif;font-weight:400;margin:0;}
   background: var(--coral); 
   color: #fff; 
 }
-.btn-link-copy .copy-icon { font-size: 14px; }
+.btn-link-copy .copy-icon { font-size: 15px; }
 
-.notice-text{padding:8px 4px 0; border-top:1px dashed var(--line); margin-top:8px;}
-.notice-title{font-size:14px;font-weight:700;color:#16232B;margin:0 0 8px;}
-.notice-text p:not(.notice-title){margin:0 0 7px;font-size:13px;line-height:1.7;color:#7C8B87;}
+.notice-text{padding:10px 4px 0; border-top:1px dashed var(--line); margin-top:8px;}
+.notice-title{font-size:14.5px;font-weight:700;color:#16232B;margin:0 0 8px;} /* 14px -> 14.5px */
+.notice-text p:not(.notice-title){margin:0 0 7px;font-size:13.5px;line-height:1.7;color:#7C8B87;} /* 13px -> 13.5px */
 </style>
 </head>
 <body>
@@ -197,7 +201,7 @@ h1,h2,h3{font-family:'Jua',sans-serif;font-weight:400;margin:0;}
   <section id="screen-intro" class="screen active">
     <div class="intro-top">
       <div class="eyebrow">여름나기 부캐 테스트</div>
-      <h1 class="intro-title">무더운...<br>나의 <em>여름나기 부캐</em>는?</h1>
+      <h1 class="intro-title">무더운 여름<br>나의 <em>여름나기 부캐</em>는?</h1>
       <p class="intro-sub">간단한 질문으로 알아보는 여름나기 성향 테스트.<br>나의 여름 부캐 알아보고, 경품까지 받아가세요!</p>
       <div class="intro-meta">
         <span class="meta-chip">⏱ 1분 완성</span>
@@ -214,10 +218,9 @@ h1,h2,h3{font-family:'Jua',sans-serif;font-weight:400;margin:0;}
       <p class="intro-foot">나의 여름나기 부캐는 어떤 유형일까?</p>
     </div>
     
-    <!-- 🌟 [메인페이지 피드백 반영] 메인 최하단에도 부담스럽지 않은 슬림형 링크 복사 칩 배치 -->
     <div class="copy-section">
       <button class="btn-link-copy" onclick="copyPageLink()">
-        <span class="copy-icon">🔗</span> 링크 복사하기
+        <span class="copy-icon">🔗</span> 테스트 링크 복사하기
       </button>
     </div>
   </section>
@@ -230,7 +233,7 @@ h1,h2,h3{font-family:'Jua',sans-serif;font-weight:400;margin:0;}
     </div>
     <div class="quiz-image" id="qImage"></div>
     <div class="options" id="qOptions"></div>
-    <div class="quiz-foot">답변을 선택하면 다음 질문으로 넘어가요</div>
+    <div class="quiz-foot">답변을 선택하면 바로 다음 질문으로 넘어가요</div>
   </section>
   
   <section id="screen-loading" class="screen">
@@ -279,7 +282,7 @@ h1,h2,h3{font-family:'Jua',sans-serif;font-weight:400;margin:0;}
     <!-- 결과페이지 하단 알약 형태 링크 복사 칩 -->
     <div class="copy-section">
       <button class="btn-link-copy" onclick="copyPageLink()">
-        <span class="copy-icon">🔗</span> 링크 복사하기
+        <span class="copy-icon">🔗</span> 결과 주소 복사하기
       </button>
     </div>
 
